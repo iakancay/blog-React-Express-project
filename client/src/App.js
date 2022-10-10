@@ -10,11 +10,20 @@ import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 
 function App() {
   const { isDarkMode } = useContext(ThemeContext);
-  const theme = createTheme({
+  const themeLight = createTheme({
     palette: {
-      mode: `${isDarkMode ? "dark" : "light"}`,
+      mode: "light",
+      background: { paper: "#e5e5dc", default: "#ecece5" },
+      text: { primary: "#658134" },
     },
   });
+  const themeDark = createTheme({
+    palette: {
+      mode: "dark",
+      text: { primary: "#658134" },
+    },
+  });
+  const theme = isDarkMode ? themeDark : themeLight;
   return (
     <>
       <ThemeProvider theme={theme}>

@@ -1,18 +1,34 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useFetch } from "../hooks/useFetch";
 import { PostsContext } from "../contexts/PostsProvider";
 import { Button, Chip, Container, Divider, Typography } from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import EditForm from "../components/EditForm";
+import { measureTime } from "../helpers/timeMeasure";
 
 export default function PostDetail() {
   const [open, setOpen] = useState(false);
+  const [post, setPost] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
   const { id } = useParams();
-  let navigate = useNavigate();
-  const url = `http://localhost:5000/posts/${id}`;
-  const { data: post, isLoading, error } = useFetch(url);
   const { deletePost } = useContext(PostsContext);
+  let navigate = useNavigate();
+
+  const url = `http://localhost:5000/posts/${id}`;
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setPost(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, [url]);
 
   const handleDelete = () => {
     deletePost(id);
@@ -27,7 +43,12 @@ export default function PostDetail() {
     <h1>Error</h1>
   ) : (
     <>
-      <EditForm open={open} post={post} handleClose={handleClose} />
+      <EditForm
+        open={open}
+        post={post}
+        handleClose={handleClose}
+        setPost={setPost}
+      />
       <Container className="post-detail" maxWidth="md" sx={{ mb: 3 }}>
         <div className="post-detail-header">
           <Typography variant="h5" gutterBottom>
@@ -55,25 +76,23 @@ export default function PostDetail() {
 
         <Divider />
         <Typography variant="overline" gutterBottom>
-          {post.subtitle}
+          {post?.subtitle}
         </Typography>
         <Typography variant="caption" component="p" gutterBottom>
-          {`36 minutes ago- by ${post.author}`}
+          {`${measureTime(post?.date)}- by ${post?.author}`}
         </Typography>
         <Chip label={`# ${post?.tag}`} variant="outlined" />
 
         <div>
           <img src={post?.image} alt="Post" className="post-detail-image" />
 
-          {post?.content.split("   ").map((p) => (
-            <Typography
-              variant="body1"
-              className="post-detail-content"
-              gutterBottom
-            >
-              {p}
-            </Typography>
-          ))}
+          <Typography
+            variant="body1"
+            className="post-detail-content"
+            gutterBottom
+          >
+            {post?.content}
+          </Typography>
         </div>
       </Container>
     </>

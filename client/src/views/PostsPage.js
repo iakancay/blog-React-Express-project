@@ -14,7 +14,7 @@ export default function PostsPage() {
         <>
           <Grid container spacing={2}>
             {posts?.map((post) => (
-              <Grid key={post["_id"]} item xs={12} md={4} lg={4}>
+              <Grid key={post["_id"]} item xs={12} sm={6} lg={4}>
                 <PostCard post={post} />
               </Grid>
             ))}

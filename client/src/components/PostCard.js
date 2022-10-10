@@ -10,7 +10,7 @@ import {
   Chip,
   Typography,
 } from "@mui/material";
-import { ReadMore } from "@mui/icons-material";
+import { measureTime } from "../helpers/timeMeasure";
 
 export default function PostCard({ post }) {
   return (
@@ -25,7 +25,7 @@ export default function PostCard({ post }) {
 
       <div className="post-card-overlay">
         <Typography variant="h6">{post?.author}</Typography>
-        <Typography variant="body2">36 minutes ago</Typography>
+        <Typography variant="body2">{measureTime(post?.date)}</Typography>
       </div>
       <CardHeader title={post?.title} subheader={post?.subtitle} />
 
@@ -40,10 +40,9 @@ export default function PostCard({ post }) {
         <Chip label={`# ${post?.tag}`} variant="outlined" sx={{ mr: 1 }} />
       </CardContent>
       <CardActions disableSpacing>
-        <Button size="small" color="success">
-          <ReadMore sx={{ mr: 1 }} />
-          <Link style={{ textDecoration: "none" }} to={`/posts/${post["_id"]}`}>
-            <Typography color="lightblue">Read More</Typography>
+        <Button size="small">
+          <Link style={{ color: "#658134" }} to={`/posts/${post["_id"]}`}>
+            <Typography>Read More</Typography>
           </Link>
         </Button>
       </CardActions>

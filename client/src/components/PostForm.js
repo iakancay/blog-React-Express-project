@@ -36,7 +36,7 @@ export default function PostForm({ open, handleClose }) {
   } = useForm({ resolver: yupResolver(postSchema) });
 
   const onSubmit = (data) => {
-    createPost({ ...data, image: file });
+    createPost({ ...data, image: file, date: Date.now() });
     handleCancel();
   };
   const handleCancel = () => {
@@ -48,13 +48,13 @@ export default function PostForm({ open, handleClose }) {
   return (
     <>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Create New Post</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To create new post please fill this form.
-          </DialogContentText>
+        <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+          <DialogTitle>Create New Post</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              To create new post please fill this form.
+            </DialogContentText>
 
-          <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
             <TextField
               autoFocus
               margin="dense"
@@ -115,14 +115,14 @@ export default function PostForm({ open, handleClose }) {
               helperText={errors?.author?.message}
             />
             <FileBase64 onDone={({ base64 }) => setFile(base64)} />
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCancel}>Cancel</Button>
-          <Button type="submit" onClick={() => handleSubmit(onSubmit)()}>
-            Send Post
-          </Button>
-        </DialogActions>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCancel}>Cancel</Button>
+            <Button type="submit" onClick={() => handleSubmit(onSubmit)}>
+              Send Post
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </>
   );

@@ -7,7 +7,7 @@ import NewPostButton from "./NewPostButton";
 export default function Navbar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar className="navbar" position="sticky">
+      <AppBar position="sticky" sx={{ background: "#97a829" }}>
         <Container maxWidth="lg">
           <Toolbar>
             <Typography
@@ -19,13 +19,13 @@ export default function Navbar() {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "inherit",
+                color: "white",
                 textDecoration: "none",
               }}
             >
               B
             </Typography>
-            <BorderColor />
+
             <Typography
               variant="h5"
               noWrap
@@ -37,10 +37,11 @@ export default function Navbar() {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "inherit",
+                color: "white",
                 textDecoration: "none",
               }}
             >
+              <BorderColor />
               OGME
             </Typography>
             <ThemeSwitch />

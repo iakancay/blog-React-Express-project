@@ -11,20 +11,17 @@ export default function NewPostButton() {
   return (
     <>
       <Button
-        className="button new-post-button"
-        variant="outlined"
-        color="inherit"
         onClick={handleOpen}
+        sx={{ color: "white", border: "2px solid white" }}
       >
         <Typography
           sx={{
-            fontFamily: "monospace",
             fontWeight: 700,
-            color: "inherit",
+            color: "white",
             textDecoration: "none",
           }}
         >
-          ____
+          NEW __
         </Typography>
         <Edit />
       </Button>

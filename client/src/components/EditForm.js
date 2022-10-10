@@ -12,12 +12,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { PostsContext } from "../contexts/PostsProvider";
 import FileBase64 from "react-file-base64";
-import { useNavigate } from "react-router-dom";
 
-export default function EditForm({ open, handleClose, post }) {
-  let navigate = useNavigate();
+export default function EditForm({ open, handleClose, post, setPost }) {
   const [file, setFile] = useState(null);
   const { updatePost } = useContext(PostsContext);
+
   const postSchema = yup.object().shape({
     title: yup.string().required(),
     subtitle: yup.string().required(),
@@ -30,7 +29,6 @@ export default function EditForm({ open, handleClose, post }) {
   });
 
   const {
-    reset,
     handleSubmit,
     formState: { errors },
     register,
@@ -38,22 +36,16 @@ export default function EditForm({ open, handleClose, post }) {
 
   const onSubmit = (data) => {
     updatePost(post["_id"], { ...data, image: file });
-    handleCancel();
-  };
-
-  const handleCancel = () => {
-    navigate(`/posts/${post["_id"]}`);
+    setPost({ ...data, image: file, _id: post._id, date: post.date });
     handleClose();
-    setFile(null);
-    reset();
   };
 
   return (
     <>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Edit Post</DialogTitle>
-        <DialogContent>
-          <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+        <form noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+          <DialogTitle>Edit Post</DialogTitle>
+          <DialogContent>
             <TextField
               autoFocus
               margin="dense"
@@ -118,14 +110,14 @@ export default function EditForm({ open, handleClose, post }) {
               defaultValue={post.author}
             />
             <FileBase64 onDone={({ base64 }) => setFile(base64)} />
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCancel}>Cancel</Button>
-          <Button type="submit" onClick={() => handleSubmit(onSubmit)()}>
-            Update
-          </Button>
-        </DialogActions>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button type="submit" onClick={() => handleSubmit(onSubmit)}>
+              Update
+            </Button>
+          </DialogActions>
+        </form>
       </Dialog>
     </>
   );
