@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { measureTime } from "../helpers/timeMeasure";
+import articleImg from "./../assets/default.jpeg";
 
 export default function PostCard({ post }) {
   return (
@@ -19,7 +20,7 @@ export default function PostCard({ post }) {
         className="post-card-image"
         component="img"
         height="195"
-        image={post?.image}
+        image={post?.image || articleImg}
         alt="post image"
       />
 

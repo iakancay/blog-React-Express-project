@@ -11,6 +11,3 @@ export const measureTime = (date) => {
     return `${day}/${month + 1}/${year}`;
   }
 };
-
-let time = measureTime("2022-10-10T12:08:53.231Z");
-console.log(time);

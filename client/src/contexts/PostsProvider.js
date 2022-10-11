@@ -5,43 +5,60 @@ export const PostsProvider = ({ children }) => {
   const url = "http://localhost:5000/posts";
 
   const [posts, setPosts] = useState([]);
-
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   useEffect(() => {
     setIsLoading(true);
     (async () => {
-      const response = await fetch(url);
-      const data = await response.json();
-      setPosts(data);
-      setIsLoading(false);
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setPosts(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
     })();
   }, []);
 
   const createPost = async (reqBody) => {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(reqBody),
-    });
-    const data = await response.json();
-    setPosts([...posts, data]);
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reqBody),
+      });
+      const data = await response.json();
+      setPosts([...posts, data]);
+    } catch (error) {
+      setError(error.message);
+    }
   };
   const deletePost = async (id) => {
-    const response = await fetch(`${url}/${id}`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
-    setPosts(posts.filter((post) => post["_id"] !== id));
-    return await response.json();
+    try {
+      const response = await fetch(`${url}/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+      setPosts(posts.filter((post) => post["_id"] !== id));
+      return await response.json();
+    } catch (error) {
+      setError(error.message);
+    }
   };
   const updatePost = async (id, reqBody) => {
-    const response = await fetch(`${url}/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(reqBody),
-    });
-    const data = await response.json();
-    setPosts(posts.map((post) => (post["_id"] !== id ? post : data)));
+    try {
+      const response = await fetch(`${url}/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reqBody),
+      });
+      const data = await response.json();
+      setPosts(posts.map((post) => (post["_id"] !== id ? post : data)));
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
@@ -49,6 +66,7 @@ export const PostsProvider = ({ children }) => {
       value={{
         posts,
         isLoading,
+        error,
         createPost,
         deletePost,
         updatePost,

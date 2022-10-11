@@ -29,8 +29,8 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <PostsProvider>
-          <Navbar />
           <Router>
+            <Navbar />
             <Routes>
               <Route path="/posts" element={<PostsPage />} />
               <Route path="/posts/:id" element={<PostDetail />} />

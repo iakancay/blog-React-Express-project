@@ -1,15 +1,28 @@
 import React, { useContext } from "react";
-import { Container, Grid } from "@mui/material";
+import {
+  Alert,
+  Backdrop,
+  CircularProgress,
+  Container,
+  Grid,
+} from "@mui/material";
 import PostCard from "../components/PostCard";
 import { PostsContext } from "../contexts/PostsProvider";
 
 export default function PostsPage() {
-  const { posts, isLoading } = useContext(PostsContext);
+  const { posts, isLoading, error } = useContext(PostsContext);
 
   return (
     <Container className="posts-list" maxWidth="lg">
       {isLoading ? (
-        <h1>Loading...</h1>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={true}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      ) : error ? (
+        <Alert severity="error">{error}</Alert>
       ) : (
         <>
           <Grid container spacing={2}>

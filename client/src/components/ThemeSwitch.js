@@ -13,10 +13,10 @@ export default function ThemeSwitch() {
         edge="start"
         color="inherit"
         aria-label="menu"
-        sx={{ mr: 2 }}
+        sx={{ mr: 2, color: "white" }}
         onClick={handleTheme}
       >
-        <LightMode sx={{ color: "yellow" }} />
+        <LightMode />
       </IconButton>
     </>
   ) : (

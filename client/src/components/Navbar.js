@@ -3,34 +3,19 @@ import { AppBar, Box, Container, Toolbar, Typography } from "@mui/material";
 import ThemeSwitch from "./ThemeSwitch";
 import { BorderColor } from "@mui/icons-material";
 import NewPostButton from "./NewPostButton";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="sticky" sx={{ background: "#97a829" }}>
         <Container maxWidth="lg">
           <Toolbar>
             <Typography
-              variant="h5"
+              variant="h4"
               noWrap
-              component="a"
-              href="http://localhost:3000/posts"
-              sx={{
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "white",
-                textDecoration: "none",
-              }}
-            >
-              B
-            </Typography>
-
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="http://localhost:3000/posts"
               sx={{
                 mr: 2,
                 flexGrow: 1,
@@ -39,8 +24,13 @@ export default function Navbar() {
                 letterSpacing: ".3rem",
                 color: "white",
                 textDecoration: "none",
+                cursor: "pointer",
+              }}
+              onClick={() => {
+                navigate("/posts");
               }}
             >
+              B
               <BorderColor />
               OGME
             </Typography>

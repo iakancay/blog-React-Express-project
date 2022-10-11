@@ -22,7 +22,7 @@ export default function EditForm({ open, handleClose, post, setPost }) {
     subtitle: yup.string().required(),
     content: yup
       .string()
-      .min(10, "You need to write at least 50 character!")
+      .min(100, "You need to write at least 100 character!")
       .required(),
     tag: yup.string().max(20, "Tag must be maximum 20 character!").required(),
     author: yup.string().required(),
@@ -109,7 +109,7 @@ export default function EditForm({ open, handleClose, post, setPost }) {
               helperText={errors?.author?.message}
               defaultValue={post.author}
             />
-            <FileBase64 onDone={({ base64 }) => setFile(base64)} />
+            <FileBase64 required onDone={({ base64 }) => setFile(base64)} />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>

@@ -22,7 +22,7 @@ export default function PostForm({ open, handleClose }) {
     subtitle: yup.string().required(),
     content: yup
       .string()
-      .min(10, "You need to write at least 50 character!")
+      .min(100, "You need to write at least 100 character!")
       .required(),
     tag: yup.string().max(20, "Tag must be maximum 20 character!").required(),
     author: yup.string().required(),

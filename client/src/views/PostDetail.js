@@ -1,10 +1,20 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PostsContext } from "../contexts/PostsProvider";
-import { Button, Chip, Container, Divider, Typography } from "@mui/material";
+import {
+  Alert,
+  Backdrop,
+  Button,
+  Chip,
+  CircularProgress,
+  Container,
+  Divider,
+  Typography,
+} from "@mui/material";
 import { Delete, Edit } from "@mui/icons-material";
 import EditForm from "../components/EditForm";
 import { measureTime } from "../helpers/timeMeasure";
+import articleImg from "./../assets/default.jpeg";
 
 export default function PostDetail() {
   const [open, setOpen] = useState(false);
@@ -38,9 +48,14 @@ export default function PostDetail() {
   const handleClose = () => setOpen(false);
 
   return isLoading ? (
-    <h1>Loading...</h1>
+    <Backdrop
+      sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      open={true}
+    >
+      <CircularProgress color="inherit" />
+    </Backdrop>
   ) : error ? (
-    <h1>Error</h1>
+    <Alert severity="error">{error}</Alert>
   ) : (
     <>
       <EditForm
@@ -84,7 +99,11 @@ export default function PostDetail() {
         <Chip label={`# ${post?.tag}`} variant="outlined" />
 
         <div>
-          <img src={post?.image} alt="Post" className="post-detail-image" />
+          <img
+            src={post?.image || articleImg}
+            alt="Post"
+            className="post-detail-image"
+          />
 
           <Typography
             variant="body1"
