@@ -21,12 +21,12 @@
   - react-router-dom@v6 (for routing)
 
  ### Server Side
-   -Express
-   -cors
-   -mongoose
+   - Express
+   - cors
+   - mongoose
    
 ## File Structure
-
+```
 Client
  ┃
 📦src
@@ -57,7 +57,7 @@ Client
  ┗ 📜index.js
 
  
- 📦Server
+ 📦 Server
  ┣ 📂controllers
  ┃ ┗ 📜posts.js
  ┣ 📂models
@@ -65,6 +65,6 @@ Client
  ┣ 📂routes
  ┃ ┗ 📜posts.js
  ┗ 📜index.js
- 
+ ```
 
 
