@@ -30,7 +30,7 @@ export const PostsProvider = ({ children }) => {
         body: JSON.stringify(reqBody),
       });
       const data = await response.json();
-      setPosts([...posts, data]);
+      setPosts([data, ...posts]);
     } catch (error) {
       setError(error.message);
     }
