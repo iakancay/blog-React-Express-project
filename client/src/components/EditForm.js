@@ -11,7 +11,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { PostsContext } from "../contexts/PostsProvider";
-import FileBase64 from "react-file-base64";
+import Upload from "../helpers/Upload";
+//import FileBase64 from "react-file-base64";
 
 export default function EditForm({ open, handleClose, post, setPost }) {
   const [file, setFile] = useState(null);
@@ -109,7 +110,8 @@ export default function EditForm({ open, handleClose, post, setPost }) {
               helperText={errors?.author?.message}
               defaultValue={post.author}
             />
-            <FileBase64 required onDone={({ base64 }) => setFile(base64)} />
+            <Upload setFile={setFile} />
+            {/* <FileBase64 required onDone={({ base64 }) => setFile(base64)} /> */}
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
