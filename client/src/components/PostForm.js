@@ -45,6 +45,7 @@ export default function PostForm({ open, handleClose }) {
     setFile(null);
     reset();
   };
+  console.log(file);
 
   return (
     <>

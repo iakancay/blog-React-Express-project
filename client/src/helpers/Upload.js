@@ -8,9 +8,19 @@ export default function Upload({ setFile }) {
       {
         cloudName: "dmykyluyo",
         uploadPreset: "xDacvQs",
-        sources: ["local", "url", "camera"],
-        /* tags: ["myname"],
-        maxImageWidth: 600, */
+        sources: [
+          "local",
+          "url",
+          "camera",
+          "google_drive",
+          "facebook",
+          "dropbox",
+        ],
+        googleApiKey: "<image_search_google_api_key>",
+        showAdvancedOptions: false,
+        cropping: true,
+        multiple: false,
+        defaultSource: "local",
       },
       (error, result) => {
         if (!error && result && result.event === "success") {

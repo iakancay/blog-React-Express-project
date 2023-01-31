@@ -32,7 +32,7 @@ function App() {
           <Router>
             <Navbar />
             <Routes>
-              <Route path="/posts" element={<PostsPage />} />
+              <Route path="/" element={<PostsPage />} />
               <Route path="/posts/:id" element={<PostDetail />} />
             </Routes>
           </Router>
