@@ -25,7 +25,7 @@ export default function PostDetail() {
   const { deletePost } = useContext(PostsContext);
   let navigate = useNavigate();
 
-  const url = `http://localhost:5000/posts/${id}`;
+  const url = `/posts/${id}`;
   useEffect(() => {
     (async () => {
       try {

@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 
 export const PostsContext = createContext();
 export const PostsProvider = ({ children }) => {
-  const url = "http://localhost:5000/posts";
+  const url = "/posts";
 
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
