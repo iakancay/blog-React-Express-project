@@ -1,23 +1,22 @@
 {
-  "name": "blog-React-Express-project",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start": "concurrently \"npm run start:client\" \"npm run start:server\"",
-    "start:client": "cd client && npm run start && cd ..",
-    "start:server": "cd server && npm run start && cd .."
+    "start": "node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iakancay/blog-React-Express-project.git"
-  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/iakancay/blog-React-Express-project/issues"
-  },
-  "homepage": "https://github.com/iakancay/blog-React-Express-project#readme",
   "dependencies": {
-    "concurrently": "^7.6.0"
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
