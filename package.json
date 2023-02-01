@@ -5,8 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "setup": "npm install",
-    "start": "node index.js"
+    "setup": "npm install && cd client && npm run setup && cd ..",
+    "build": "cd client && npm run build && cd ..",
+    "start": "node index.js && cd client && npm run start && cd .."
   },
   "keywords": [],
   "author": "",
