@@ -11,23 +11,23 @@ const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
+console.log(_dirname);
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-// app.get("/", (req, res) => {
-//   res.send("Backend is working..");
-// });
-app.use(express.static(path.join(__dirname, "./client/build")));
-app.get("*", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "./client/build/index.html"),
-    function (err) {
-      res.status(500).send(err);
-    }
-  );
+app.get("/", (req, res) => {
+  res.send("Backend is working..");
 });
+// app.use(express.static(path.join(__dirname, "./client/build")));
+// app.get("*", function (_, res) {
+//   res.sendFile(
+//     path.join(__dirname, "./client/build/index.html"),
+//     function (err) {
+//       res.status(500).send(err);
+//     }
+//   );
+// });
 
 app.use("/posts", postsRouter);
 
