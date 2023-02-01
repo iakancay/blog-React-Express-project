@@ -2,7 +2,7 @@ import React, { createContext, useEffect, useState } from "react";
 
 export const PostsContext = createContext();
 export const PostsProvider = ({ children }) => {
-  const url = "/posts";
+  const url = "https://nervous-ray-scrubs.cyclic.app/posts";
 
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

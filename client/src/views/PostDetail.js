@@ -25,7 +25,7 @@ export default function PostDetail() {
   const { deletePost } = useContext(PostsContext);
   let navigate = useNavigate();
 
-  const url = `/posts/${id}`;
+  const url = `https://nervous-ray-scrubs.cyclic.app/posts/${id}`;
   useEffect(() => {
     (async () => {
       try {
