@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import { fileURLToPath } from "url";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -7,6 +8,9 @@ import postsRouter from "./routes/posts.js";
 dotenv.config();
 
 const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
