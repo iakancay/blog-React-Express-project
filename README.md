@@ -1,5 +1,5 @@
 # BLOGME Mern Application
-Project link is available [BLOGME](https://main--stately-cucurucho-46f72c.netlify.app/posts/63456daebdead82b14ac1c15)
+Project link is available [BLOGME](https://main--stately-cucurucho-46f72c.netlify.app/)
  
  ## Home Page
  ![HomePage](./client/src/assets/home.png)
